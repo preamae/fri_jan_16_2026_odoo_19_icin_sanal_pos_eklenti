@@ -1,0 +1,82 @@
+/* Taksit Kartları */
+.installment-bank-card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.installment-bank-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    transform: translateY(-4px);
+}
+
+.installment-bank-card . card-header {
+    padding: 20px;
+    font-weight: 600;
+}
+
+.installment-bank-card table {
+    font-size: 0.95rem;
+}
+
+.installment-bank-card thead th {
+    background: #f8f9fa;
+    font-weight: 600;
+    padding: 12px 8px;
+    border-bottom:  2px solid #dee2e6;
+}
+
+.installment-bank-card tbody td {
+    padding: 14px 8px;
+    vertical-align: middle;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.installment-bank-card tbody tr: last-child td {
+    border-bottom: none;
+}
+
+.bg-success-light {
+    background-color: #d4edda !important;
+}
+
+/* Sepet Taksit Özeti */
+.mews-cart-installment-summary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.mews-calc-btn {
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px 24px;
+    transition: all 0.3s ease;
+}
+
+.mews-calc-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Modal */
+.modal-xl {
+    max-width: 1200px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .installment-bank-card {
+        margin-bottom: 20px;
+    }
+    
+    .mews-cart-installment-summary . row {
+        text-align: center;
+    }
+    
+    .mews-cart-installment-summary .col-md-4 {
+        margin-top: 15px;
+    }
+}

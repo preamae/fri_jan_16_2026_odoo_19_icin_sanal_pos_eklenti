@@ -1,0 +1,79 @@
+/* Ödeme Sayfası Taksit Seçimi */
+#o_payment_installments_container {
+    background:  #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+#o_payment_installments_container h5 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+#installment_options . list-group-item {
+    cursor: pointer;
+    border: 2px solid #dee2e6;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+#installment_options .list-group-item:hover {
+    background-color:  #f0f8ff;
+    border-color: #007bff;
+}
+
+#installment_options .list-group-item: has(input: checked) {
+    background-color: #e7f3ff;
+    border-color: #007bff;
+    box-shadow: 0 2px 8px rgba(0,123,255,0.2);
+}
+
+#installment_options .form-check-input: checked {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+#installment_options .text-success {
+    color: #28a745 !important;
+}
+
+/* Ürün Sayfası Taksitler */
+.o_wsale_product_installments . card {
+    border: none;
+}
+
+.o_wsale_product_installments .card-header {
+    background:  linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.o_wsale_product_installments table {
+    font-size: 0.95rem;
+}
+
+.o_wsale_product_installments thead {
+    background-color: #f8f9fa;
+}
+
+.o_wsale_product_installments tbody tr: hover {
+    background-color:  #f1f3f5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #o_payment_installments_container {
+        padding: 15px;
+    }
+    
+    #installment_options .list-group-item {
+        flex-direction: column;
+        align-items: flex-start ! important;
+    }
+    
+    #installment_options . text-end {
+        text-align: left !important;
+        margin-top: 10px;
+        width: 100%;
+    }
+}

@@ -1,0 +1,48 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'Mews Sanal POS Entegrasyonu',
+    'version': '19.0.1.0.0',
+    'category': 'Accounting/Payment',
+    'summary': 'Türk bankaları için sanal POS entegrasyonu',
+    'description': """
+        Mews POS Python Entegrasyonu
+    """,
+    'author': 'Your Company',
+    'website': 'https://www.yourcompany.com',
+    'license': 'LGPL-3',
+    'depends': [
+        'base',
+        'sale',
+        'payment',
+        'product',
+        'website_sale',
+    ],
+    'data': [
+        'security/ir. model.access.csv',
+        'data/payment_provider_data.xml',
+        'views/payment_provider_views.xml',
+        'views/product_category_views.xml',
+        'views/product_template_views.xml',
+        # 'views/installment_views.xml',  # ❌ KALDIRILDI
+        'views/templates.xml',
+        'views/installment_calculator_wizard_views.xml',
+        'views/refund_wizard_views.xml',
+    ],
+    'assets': {
+        'web.assets_frontend': [
+            'mews_pos/static/src/js/installment_calculator. js',
+            'mews_pos/static/src/css/installment. css',
+        ],
+    },
+    'external_dependencies': {
+        'python': [
+            'requests',
+            'zeep',
+            'cryptography',
+            'lxml',
+        ],
+    },
+    'installable': True,
+    'application':  True,
+    'auto_install': False,
+}

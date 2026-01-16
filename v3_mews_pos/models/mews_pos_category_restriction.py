@@ -1,0 +1,1 @@
+_name = 'mews.pos.category.restriction'

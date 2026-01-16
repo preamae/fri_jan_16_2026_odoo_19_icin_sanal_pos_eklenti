@@ -1,0 +1,67 @@
+<? xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Taksit Tab Template -->
+    <template id="product_installment_tab" name="Product Installment Options">
+        <section class="container mt-4 mb-4">
+            <h3 class="mb-3">Taksit Seçenekleri</h3>
+            <div class="row" t-if="installment_options">
+                <t t-foreach="installment_options" t-as="bank_option">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-header text-center text-white" t-att-style="'background:  ' + bank_option.get('color', '#6c757d')">
+                                <h5 class="mb-0" t-esc="bank_option['bank_name']"/>
+                            </div>
+                            <div class="card-body p-0">
+                                <table class="table table-sm mb-0">
+                                    <thead class="thead-light">
+                                        <tr class="text-center">
+                                            <th width="20%">Taksit</th>
+                                            <th width="40%">Aylık Tutar</th>
+                                            <th width="40%">Toplam</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="bank_option['installments']" t-as="inst">
+                                            <tr class="text-center" t-att-class="'bg-success-light' if inst.get('is_campaign') else ''">
+                                                <td><strong t-esc="inst['installment_count']"/></td>
+                                                <td>
+                                                    <strong class="text-primary">
+                                                        <t t-esc="'{:,.2f}'.format(inst['installment_amount'])"/> ₺
+                                                    </strong>
+                                                    <br t-if="inst.get('is_campaign')"/>
+                                                    <span t-if="inst.get('is_campaign')" class="badge badge-success badge-sm">Kampanya</span>
+                                                </td>
+                                                <td class="text-muted">
+                                                    <t t-esc="'{:,. 2f}'.format(inst['total_amount'])"/> ₺
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+            <div class="alert alert-info" t-else="">
+                Bu ürün için taksit seçeneği bulunmamaktadır.
+            </div>
+        </section>
+    </template>
+
+    <!-- Ürün Sayfasına Ekleme - REPLACE İLE -->
+    <template id="product_installments_main" inherit_id="website_sale.product" name="Product Page Installments">
+        <xpath expr="//hr[@id='hr_product_detail_main']" position="after">
+            <t t-set="installment_options" t-value="product._get_installment_display_data()"/>
+            <t t-call="mews_pos.product_installment_tab"/>
+        </xpath>
+    </template>
+
+    <!-- Assets -->
+    <template id="mews_assets_frontend" inherit_id="website.assets_frontend">
+        <xpath expr="." position="inside">
+            <link href="/mews_pos/static/src/css/installment.css" rel="stylesheet"/>
+            <script src="/mews_pos/static/src/js/installment_calculator.js"/>
+        </xpath>
+    </template>
+</odoo>
