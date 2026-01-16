@@ -1,0 +1,32 @@
+<? xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_category_form_mews_pos" model="ir. ui.view">
+        <field name="name">product.category.form. mews_pos</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view"/>
+        <field name="arch" type="xml">
+            <sheet position="inside">
+                <notebook>
+                    <page string="Taksit Ayarları" name="installment_settings">
+                        <group>
+                            <field name="installment_allowed"/>
+                            <field name="max_installment_global" 
+                                   invisible="not installment_allowed"/>
+                        </group>
+                        <field name="installment_restriction_ids" 
+                               invisible="not installment_allowed">
+                            <tree editable="bottom">
+                                <field name="bank_id"/>
+                                <field name="installment_allowed"/>
+                                <field name="min_installment"/>
+                                <field name="max_installment"/>
+                                <field name="blocked_installments"/>
+                                <field name="notes"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </sheet>
+        </field>
+    </record>
+</odoo>

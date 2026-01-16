@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Taksit Seçim Widget'ı -->
+    <template id="installment_selector" name="Taksit Seçici">
+        <div class="mews-installment-selector" t-att-data-amount="amount">
+            <div class="row">
+                <div class="col-12">
+                    <h4>Taksit Seçenekleri</h4>
+                </div>
+            </div>
+            
+            <div class="installment-banks">
+                <t t-foreach="banks" t-as="bank_data">
+                    <div class="bank-section card mb-3">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <t t-if="bank_data['bank']['logo']">
+                                    <img t-att-src="'data:image/png;base64,' + bank_data['bank']['logo']" 
+                                         class="bank-logo me-2" style="height: 30px;"/>
+                                </t>
+                                <strong t-esc="bank_data['bank']['name']"/>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Taksit</th>
+                                        <th>Taksit Tutarı</th>
+                                        <th>Toplam Tutar</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="installment-row">
+                                        <td>Tek Çekim</td>
+                                        <td t-esc="'%.2f TL' % amount"/>
+                                        <td t-esc="'%.2f TL' % amount"/>
+                                        <td>
+                                            <input type="radio" 
+                                                   name="installment" 
+                                                   value="1"
+                                                   t-att-data-bank-id="bank_data['bank']['id']"
+                                                   class="form-check-input"
+                                                   checked="checked"/>
+                                        </td>
+                                    </tr>
+                                    <t t-foreach="bank_data['installments']" t-as="inst">
+                                        <tr class="installment-row" 
+                                            t-att-class="'table-success' if inst.get('is_campaign') else ''">
+                                            <td>
+                                                <t t-esc="inst['installment_count']"/> Taksit
+                                                <t t-if="inst. get('is_campaign')">
+                                                    <span class="badge bg-success">Kampanya</span>
+                                                </t>
+                                            </td>
+                                            <td t-esc="'%.2f TL' % inst['installment_amount']"/>
+                                            <td>
+                                                <span t-esc="'%.2f TL' % inst['total_amount']"/>
+                                                <t t-if="inst['interest_amount'] > 0">
+                                                    <small class="text-muted">
+                                                        (+<t t-esc="'%. 2f' % inst['interest_amount']"/> TL)
+                                                    </small>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <input type="radio" 
+                                                       name="installment" 
+                                                       t-att-value="inst['installment_count']"
+                                                       t-att-data-bank-id="bank_data['bank']['id']"
+                                                       t-att-data-total="inst['total_amount']"
+                                                       class="form-check-input"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </template>
+
+    <!-- 3D Secure Form -->
+    <template id="threed_form" name="3D Secure Yönlendirme">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">
+                            <i class="fa fa-lock me-2"/>Güvenli Ödeme
+                        </h4>
+                    </div>
+                    <div class="card-body text-center py-5">
+                        <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
+                            <span class="visually-hidden">Yükleniyor...</span>
+                        </div>
+                        <h5>Banka Sayfasına Yönlendiriliyorsunuz...</h5>
+                        <p class="text-muted">Lütfen bekleyiniz, güvenli ödeme sayfasına yönlendiriliyorsunuz.</p>
+                        <p class="small text-muted">
+                            <i class="fa fa-shield me-1"/>
+                            İşleminiz 256-bit SSL ile şifrelenmektedir.
+                        </p>
+                        
+                        <form id="threed_form" method="POST" t-att-action="form_data.get('gateway_url')">
+                            <t t-foreach="form_data.get('inputs', {}).items()" t-as="input">
+                                <input type="hidden" t-att-name="input[0]" t-att-value="input[1]"/>
+                            </t>
+                        </form>
+                        
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                setTimeout(function() {
+                                    document.getElementById('threed_form').submit();
+                                }, 1500);
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Ödeme Formu Widget -->
+    <template id="payment_form_widget" name="Mews POS Ödeme Formu">
+        <div class="mews-pos-payment-form">
+            <form id="mews_payment_form" action="/mews_pos/process" method="POST">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <input type="hidden" name="order_id" t-att-value="order. id"/>
+                <input type="hidden" name="bank_id" id="selected_bank_id" value=""/>
+                <input type="hidden" name="installment" id="selected_installment" value="1"/>
+                
+                <!-- Kredi Kartı Bilgileri -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fa fa-credit-card me-2"/>Kredi Kartı Bilgileri
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <label class="form-label">Kart Üzerindeki İsim</label>
+                                <input type="text" name="card_name" class="form-control" 
+                                       placeholder="AD SOYAD" required="required"
+                                       style="text-transform: uppercase;"/>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label class="form-label">Kart Numarası</label>
+                                <input type="text" name="card_number" id="card_number" 
+                                       class="form-control" placeholder="**** **** **** ****" 
+                                       maxlength="19" required="required"
+                                       autocomplete="cc-number"/>
+                                <div id="card_type_icon" class="mt-2"></div>
+                            </div>
+                            <div class="col-6 col-md-4 mb-3">
+                                <label class="form-label">Son Kullanma Ay</label>
+                                <select name="card_month" class="form-select" required="required">
+                                    <option value="">Ay</option>
+                                    <t t-foreach="range(1, 13)" t-as="m">
+                                        <option t-att-value="'%02d' % m" t-esc="'%02d' % m"/>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="col-6 col-md-4 mb-3">
+                                <label class="form-label">Son Kullanma Yıl</label>
+                                <select name="card_year" class="form-select" required="required">
+                                    <option value="">Yıl</option>
+                                    <t t-foreach="range(2024, 2040)" t-as="y">
+                                        <option t-att-value="str(y)[2:]" t-esc="y"/>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-4 mb-3">
+                                <label class="form-label">CVV/CVC</label>
+                                <input type="password" name="card_cvv" class="form-control" 
+                                       placeholder="***" maxlength="4" required="required"
+                                       autocomplete="cc-csc"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Taksit Seçenekleri -->
+                <div class="card mb-4" id="installment_section">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fa fa-list-ol me-2"/>Taksit Seçenekleri
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="installment_container">
+                            <div class="text-center py-4">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Yükleniyor...</span>
+                                </div>
+                                <p class="mt-2 text-muted">Taksit seçenekleri yükleniyor...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Özet -->
+                <div class="card mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">
+                            <i class="fa fa-shopping-cart me-2"/>Ödeme Özeti
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-borderless mb-0">
+                            <tr>
+                                <td>Sepet Tutarı: </td>
+                                <td class="text-end" t-esc="'%.2f TL' % order.amount_total"/>
+                            </tr>
+                            <tr id="interest_row" style="display: none;">
+                                <td>Vade Farkı:</td>
+                                <td class="text-end" id="interest_amount">0.00 TL</td>
+                            </tr>
+                            <tr class="border-top">
+                                <td><strong>Ödenecek Tutar: </strong></td>
+                                <td class="text-end">
+                                    <strong id="total_amount" t-esc="'%.2f TL' % order. amount_total"/>
+                                </td>
+                            </tr>
+                            <tr id="installment_info_row" style="display: none;">
+                                <td>Taksit: </td>
+                                <td class="text-end">
+                                    <span id="installment_count">1</span> x 
+                                    <span id="installment_amount" t-esc="'%.2f TL' % order. amount_total"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Güvenlik Bilgisi -->
+                <div class="alert alert-info">
+                    <i class="fa fa-info-circle me-2"/>
+                    <strong>Güvenli Ödeme: </strong> Kart bilgileriniz 256-bit SSL şifreleme ile korunmaktadır. 
+                    3D Secure doğrulama ile ödemeniz güvence altındadır.
+                </div>
+
+                <!-- Ödeme Butonu -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg" id="pay_button">
+                        <i class="fa fa-lock me-2"/>
+                        <span id="pay_button_text">Güvenli Ödeme Yap</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </template>
+
+    <!-- Ödeme Başarılı -->
+    <template id="payment_success" name="Ödeme Başarılı">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <div class="card border-success">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0">
+                            <i class="fa fa-check-circle me-2"/>Ödeme Başarılı
+                        </h4>
+                    </div>
+                    <div class="card-body text-center py-5">
+                        <div class="mb-4">
+                            <i class="fa fa-check-circle text-success" style="font-size: 5rem;"/>
+                        </div>
+                        <h3>Ödemeniz Başarıyla Tamamlandı!</h3>
+                        <p class="lead text-muted">
+                            Siparişiniz alınmıştır. Sipariş detaylarınız e-posta adresinize gönderilecektir.
+                        </p>
+                        <div class="card bg-light mt-4 mx-auto" style="max-width: 400px;">
+                            <div class="card-body">
+                                <table class="table table-sm table-borderless mb-0">
+                                    <tr>
+                                        <td>Sipariş No:</td>
+                                        <td class="text-end"><strong t-esc="order.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tutar: </td>
+                                        <td class="text-end"><strong t-esc="'%.2f TL' % transaction.total_amount"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Onay Kodu:</td>
+                                        <td class="text-end"><strong t-esc="transaction.auth_code"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <a href="/my/orders" class="btn btn-primary me-2">
+                                <i class="fa fa-list me-1"/>Siparişlerim
+                            </a>
+                            <a href="/shop" class="btn btn-outline-primary">
+                                <i class="fa fa-shopping-bag me-1"/>Alışverişe Devam Et
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Ödeme Başarısız -->
+    <template id="payment_error" name="Ödeme Başarısız">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <div class="card border-danger">
+                    <div class="card-header bg-danger text-white">
+                        <h4 class="mb-0">
+                            <i class="fa fa-times-circle me-2"/>Ödeme Başarısız
+                        </h4>
+                    </div>
+                    <div class="card-body text-center py-5">
+                        <div class="mb-4">
+                            <i class="fa fa-times-circle text-danger" style="font-size: 5rem;"/>
+                        </div>
+                        <h3>Ödeme İşlemi Tamamlanamadı</h3>
+                        <p class="lead text-muted">
+                            Ödeme işleminiz sırasında bir hata oluştu.  Lütfen tekrar deneyiniz.
+                        </p>
+                        <t t-if="error_message">
+                            <div class="alert alert-danger mx-auto" style="max-width:  500px;">
+                                <strong>Hata: </strong> <t t-esc="error_message"/>
+                            </div>
+                        </t>
+                        <div class="mt-4">
+                            <a href="/shop/payment" class="btn btn-primary me-2">
+                                <i class="fa fa-refresh me-1"/>Tekrar Dene
+                            </a>
+                            <a href="/shop/cart" class="btn btn-outline-primary">
+                                <i class="fa fa-shopping-cart me-1"/>Sepete Dön
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

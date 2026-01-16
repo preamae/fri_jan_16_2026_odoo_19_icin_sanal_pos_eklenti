@@ -1,0 +1,38 @@
+.mews-installment-options {
+    margin:  20px 0;
+    padding: 20px;
+    background:  #f8f9fa;
+    border-radius: 8px;
+}
+
+.mews-installment-options h4 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+. installment-option {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.installment-option:hover {
+    background-color: #e9ecef;
+    transform: translateX(5px);
+}
+
+.installment-option.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.mews-product-installments {
+    margin-top:  15px;
+}
+
+.badge-success {
+    background-color:  #28a745;
+}
+
+#installmentModal .modal-dialog {
+    max-width: 800px;
+}

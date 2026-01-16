@@ -1,0 +1,464 @@
+<div class="oe_cart col-12 col-lg-7">
+
+            <h3 class="mb-4">Sipariş Onay</h3>
+            <div id="address_on_payment" class="mb-4">
+        <div class="card">
+            <div class="card-body" id="shipping_and_billing">
+                <a class="float-end no-decoration" href="/shop/checkout"><i class="fa fa-pencil me-1"></i>Düzenle</a>
+                <div>
+                    <b>Faturalama &amp; Teslimat: </b>
+                    <span class="address-inline" data-oe-type="contact" data-oe-expression="order.partner_invoice_id">
+    <address class="o_portal_address mb-0" itemscope="itemscope" itemtype="http://schema.org/Organization">
+        <div class="gap-2" itemprop="address" itemscope="itemscope" itemtype="http://schema.org/PostalAddress">
+            <div class="d-flex align-items-baseline gap-1">
+                <span class="d-block w-100 lh-sm" itemprop="streetAddress">gegergerg er gerge rg efwef, Ahlat Bitlis, Türkiye</span>
+            </div>
+        </div>
+    </address></span>
+                </div>
+            </div>
+        </div>
+            </div>
+            <div class="oe_structure clearfix mt-3" id="oe_structure_website_sale_payment_1"></div>
+            <div id="delivery_carrier">
+                <h4 class="fs-6 small text-uppercase fw-bolder">Bir teslimat yöntemi seçin</h4>
+                <div class="card border-0" id="delivery_method">
+                    <ul class="list-group">
+                        <li class="list-group-item o_delivery_carrier_select">
+        <input class="pe-none" type="radio" name="delivery_type" value="6" id="delivery_6" delivery_type="yurtici" checked="checked">
+        <label class="label-optional">Yurtiçi Kargo</label>
+        <span class="o_wsale_delivery_badge_price float-end fw-bold" name="price">Ücretsiz</span>
+        <div class="small">
+            <div class="d-none">
+                <span class="o_order_location">
+                    <b class="o_order_location_name"></b>
+                    <br>
+                    <i class="o_order_location_address"></i>
+                </span>
+                <span class="fa fa-times ms-2 o_remove_order_location" aria-label="Remove this location" title="Remove this location"></span>
+            </div>
+        </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+                <div class="mt-4">
+                    <h3>Ödeme Seçenekleri</h3>
+                </div>
+                <div id="payment_method" class="o_not_editable mt-4">
+
+
+        <div class="row">
+            <div class="modal s_popup_bottom s_popup_no_backdrop" id="pay_with_3d" role="dialog" data-show-after="500" data-display="afterDelay" data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" id="3d_modal_content" style="width: 100%;height: 750px;max-width: 750px;">
+                        <div class="modal-body" style="padding: 0;overflow: hidden;">
+                            <iframe id="3d_modal_content_frame" style="width: 100%;height: 100%;" src=""></iframe>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="modal s_popup_bottom s_popup_no_backdrop" id="tacreo_sms_confirm" role="dialog" data-show-after="500" data-display="afterDelay" data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" id="3d_modal_content" style="padding:10px;width: 100%;height: auto;max-width: 350px; top: 10%;">
+                        <div class="modal-body" style="padding: 5px;overflow: hidden;">
+                            <div class="row">
+                                <h5>Cep telefonunuza gelen SMS'i giriniz.</h5>
+                            </div>
+                            <div class="row" style="padding:20px">
+                                <input name="o_tacreo_sms" id="o_tacreo_sms" type="text" required="required" class="form-control">
+                                <input name="tx_reference" type="hidden" id="tx_reference">
+                            </div>
+                            <div class="row" style="padding:20px">
+                                <a href="#" class="btn btn-primary" id="tacreo_sms_confirm_btn" name="tacreo_sms_confirm_btn">Doğrula</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form id="o_payment_form" class="o_payment_form" data-mode="payment" data-amount="2079.2" data-currency-id="30" data-partner-id="113585" data-transaction-route="/shop/payment/transaction/102615" data-landing-route="/shop/payment/validate" data-access-token="1f4b8ffb-c0b2-450d-a773-49822e81e977" data-gtm-form-interact-id="0">
+            <div id="o_payment_form_options" class="d-flex flex-column gap-3">
+
+
+                <div id="o_payment_methods" class="">
+
+                    <h4 class="fs-6 small text-uppercase fw-bolder">
+                        Ödeme Metodu Seçin
+                    </h4>
+
+                    <ul class="list-group">
+                            <li name="o_payment_option" class="list-group-item d-flex flex-column gap-2 py-3 o_outline">
+
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-0 p-0" for="o_payment_radio">
+            <div class="form-check d-flex flex-grow-1 flex-wrap mb-0">
+                <div class="d-flex justify-content-between align-items-center gap-2 flex-wrap w-100">
+
+                    <input name="o_payment_radio" type="radio" class="form-check-input position-absolute mt-0" data-payment-option-type="payment_method" id="o_payment_method_36" data-payment-option-id="36" data-payment-method-code="card" data-provider-id="17" data-provider-code="pos" data-provider-state="enabled" data-gtm-form-interact-field-id="0">
+                    <div class="d-flex gap-2 flex-grow-1 me-auto">
+
+                        <label class="o_payment_option_label mb-0 text-break" for="o_payment_method_36">Kredi Kartı</label>
+                        <div class="d-flex flex-nowrap gap-2 mt-1">
+
+
+                        </div>
+                    </div>
+                    <div class="gap-1 flex-wrap d-flex">
+
+
+        <span class="position-relative d-block rounded overflow-hidden z-index-1 shadow-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-delay="0" title="" data-bs-original-title="Kredi Kartı" aria-label="Kredi Kartı"><img src="/web/image/payment.method/36/image_payment_form/Kredi%20Kart%C4%B1?unique=27dc0b9" class="img img-fluid" alt="Kredi Kartı" loading="lazy" style=""></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div name="o_payment_inline_form" class="position-relative">
+        <div name="o_pos_form" class="o_pos_form row" data-pos-inline-form-values="{&quot;state&quot;: &quot;enabled&quot;}">
+            <div class="col-12 col-lg-6 pos-form">
+                <input name="provider_id" type="hidden" id="provider_id">
+                <input name="partner_id" type="hidden" value="113585">
+                <div id="credit-card">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="cardNumber">Kart numarası</label>
+                            <div class="input-group">
+                                <input type="text" maxlength="19" name="cardNumber" placeholder="••••  ••••  ••••  ••••" inputmode="numeric" class="form-control cardNumber" data-gtm-form-interact-field-id="1">
+                            </div>
+                            <span class="number_error" style="display: none;"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="username">Kart üzerindeki isim</label>
+                            <div class="input-group">
+                                <input type="text" name="cardName" placeholder="Kart sahibinin adı soyadı" class="form-control cart-alert">
+                            </div>
+                            <span class="name_error" style="display: inline;">Kart üzerinde yazan ismi girin</span>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="form-group">
+                                <label>Son kullanma tarihi</label>
+                                <div class="input-group">
+                                    <select name="validMonth" class="form-select">
+                                        <option value="" disabled="disabled" selected="selected">AY
+                                        </option>
+                                            <option value="1">
+                                                01
+                                            </option>
+                                            <option value="2">
+                                                02
+                                            </option>
+                                            <option value="3">
+                                                03
+                                            </option>
+                                            <option value="4">
+                                                04
+                                            </option>
+                                            <option value="5">
+                                                05
+                                            </option>
+                                            <option value="6">
+                                                06
+                                            </option>
+                                            <option value="7">
+                                                07
+                                            </option>
+                                            <option value="8">
+                                                08
+                                            </option>
+                                            <option value="9">
+                                                09
+                                            </option>
+                                            <option value="10">
+                                                10
+                                            </option>
+                                            <option value="11">
+                                                11
+                                            </option>
+                                            <option value="12">
+                                                12
+                                            </option>
+                                    </select>
+                                    <select name="validYear" class="form-select">
+                                        <option value="" disabled="disabled" selected="selected">YIL
+                                        </option>
+                                            <option value="2025">
+                                                2025
+                                            </option>
+                                            <option value="2026">
+                                                2026
+                                            </option>
+                                            <option value="2027">
+                                                2027
+                                            </option>
+                                            <option value="2028">
+                                                2028
+                                            </option>
+                                            <option value="2029">
+                                                2029
+                                            </option>
+                                            <option value="2030">
+                                                2030
+                                            </option>
+                                            <option value="2031">
+                                                2031
+                                            </option>
+                                            <option value="2032">
+                                                2032
+                                            </option>
+                                            <option value="2033">
+                                                2033
+                                            </option>
+                                            <option value="2034">
+                                                2034
+                                            </option>
+                                            <option value="2035">
+                                                2035
+                                            </option>
+                                            <option value="2036">
+                                                2036
+                                            </option>
+                                            <option value="2037">
+                                                2037
+                                            </option>
+                                            <option value="2038">
+                                                2038
+                                            </option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <div class="date_month_wrap">
+                                        <span class="date_month_error"></span>
+                                    </div>
+                                    <div class="date_year_wrap">
+                                        <span class="date_year_error"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group mb-4">
+                                <label title="Visa, Mastercard ve Troy kartların arka yüzünde bulunan 3 haneli, American Express kartların ön yüzünde bulunan 4 haneli numarayı girin.">
+                                    Güvenlik Kodu
+                                    <i class="fa fa-question-circle d-inline"></i>
+
+                                </label>
+                                <div class="input-group">
+                                    <input type="text" name="cardCVV" maxlength="3" placeholder="CVC/CVV" class="form-control cardCVV">
+                                </div>
+                                <span class="cvv_error"></span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-12 col-lg-6 text-center my-auto card_helper">
+        <div class="card_container">
+            <div class="credit_card" style="transform: rotateY(0deg);">
+                <div class="front">
+                    <span class="bank_name" style="display: inline;">QNB Finansbank</span>
+                    <div class="bank_logo_container">
+                        <img class="bank_logo" loading="lazy" style="display: inline;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK8AAABGCAIAAAA1u1NoAAAACXBIWXMAAAsTAAALEwEAmpwYAAAHp2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgOS4wLWMwMDAgMTM3LmRhNGE3ZTUsIDIwMjIvMTEvMjctMDk6MzU6MDMgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCAyNC4xIChXaW5kb3dzKSIgeG1wOkNyZWF0ZURhdGU9IjIwMjMtMDMtMDZUMTU6Mjk6NDYrMDM6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMjMtMDMtMDZUMTU6Mjk6NDYrMDM6MDAiIHhtcDpNb2RpZnlEYXRlPSIyMDIzLTAzLTA2VDE1OjI5OjQ2KzAzOjAwIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjEyZDJmZGIzLTUyNjYtMDY0Ni1iMjQ5LTZlMWM5Zjk3ZDYyMiIgeG1wTU06RG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOmY1MDk5Y2FiLTM0MDgtOTk0Ni1hYjQ1LWQyYWIwZjY5N2FhMSIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjRiZjJiOGYyLThlM2QtYzU0OC1iOGZkLTE2OTRhOGUyM2Y2MSIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjRiZjJiOGYyLThlM2QtYzU0OC1iOGZkLTE2OTRhOGUyM2Y2MSIgc3RFdnQ6d2hlbj0iMjAyMy0wMy0wNlQxNToyOTo0NiswMzowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDI0LjEgKFdpbmRvd3MpIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDoxMmQyZmRiMy01MjY2LTA2NDYtYjI0OS02ZTFjOWY5N2Q2MjIiIHN0RXZ0OndoZW49IjIwMjMtMDMtMDZUMTU6Mjk6NDYrMDM6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyNC4xIChXaW5kb3dzKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPHBob3Rvc2hvcDpEb2N1bWVudEFuY2VzdG9ycz4gPHJkZjpCYWc+IDxyZGY6bGk+M0U3M0VBQUMwODlCQTI3OTFENjdDQjAxQkQ3NUYxQ0Q8L3JkZjpsaT4gPHJkZjpsaT5FMDI5OUJBMDgxNjZBOTBBRkNDODlBM0Q4MDM3Qjk4RDwvcmRmOmxpPiA8cmRmOmxpPnV1aWQ6MTQzRUNFMzg4MDRBMTFERkI1MkU5NjUzNzQxNDAzMDM8L3JkZjpsaT4gPHJkZjpsaT54bXAuZGlkOjg3Q0E0RTYwNkU3MjExRTk4QURDQ0UxNDBCMDg2REQ4PC9yZGY6bGk+IDxyZGY6bGk+eG1wLmRpZDpFODEyODVDRjEyREYxMUUyQTRDREU3NzEyOTAzRDY1MzwvcmRmOmxpPiA8cmRmOmxp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">
+                    </div>
+                    <div class="type">
+                        <img class="cart_type" loading="lazy" style="" src="/payment_pos/static/img/card_type/MasterCard.png">
+                    </div>
+                    <span class="chip"></span>
+                    <img class="chip_image" loading="lazy" style="">
+                    <span class="card_number" style="color: var(--text-color);">5269 1102 3719 6052</span>
+                    <span class="fullname" style="color: var(--text-color);">İsim Soyisim</span>
+                    <div class="date">
+                        <span class="date_month" style="color: var(--text-color);">AA</span>
+                        /
+                        <span class="date_year" style="color: var(--text-color);">YY</span>
+                    </div>
+                    <div class="brand">
+                        <img class="brand_logo" loading="lazy" style="display: inline;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAkcAAABgCAYAAAAXddZQAAAACXBIWXMAAC4jAAAuIwF4pT92AAAGMmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgOS4wLWMwMDAgMTM3LmRhNGE3ZTUsIDIwMjIvMTEvMjctMDk6MzU6MDMgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczpwaG90b3Nob3A9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGhvdG9zaG9wLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCAyNC4xIChXaW5kb3dzKSIgeG1wOkNyZWF0ZURhdGU9IjIwMjMtMDMtMDlUMTQ6NTk6NTIrMDM6MDAiIHhtcDpNb2RpZnlEYXRlPSIyMDIzLTAzLTA5VDE1OjAwOjE3KzAzOjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIzLTAzLTA5VDE1OjAwOjE3KzAzOjAwIiBkYzpmb3JtYXQ9ImltYWdlL3BuZyIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxNTgzNzdhMC0zZjdlLWFiNDUtODZhMC03YTE2YjBmNDYzNDEiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDpjNDM1YmRjYy1lZjlhLTVlNGItODlhMi04OGE1ODExN2RiODIiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpmNTVmYmJlOC0yMmI2LTk3NDgtYWUwZi0yY2I3ZWZlNGUzZTUiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOmY1NWZiYmU4LTIyYjYtOTc0OC1hZTBmLTJjYjdlZmU0ZTNlNSIgc3RFdnQ6d2hlbj0iMjAyMy0wMy0wOVQxNDo1OTo1MiswMzowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDI0LjEgKFdpbmRvd3MpIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjb252ZXJ0ZWQiIHN0RXZ0OnBhcmFtZXRlcnM9ImZyb20gYXBwbGljYXRpb24vdm5kLmFkb2JlLnBob3Rvc2hvcCB0byBpbWFnZS9wbmciLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjE1ODM3N2EwLTNmN2UtYWI0NS04NmEwLTdhMTZiMGY0NjM0MSIgc3RFdnQ6d2hlbj0iMjAyMy0wMy0wOVQxNTowMDoxNyswMzowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDI0LjEgKFdpbmRvd3MpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PiGHIkgAACJKSURBVHja7Z35cxzF2cd7XPz+Tv4A7Y7YXUFeDo/e4qp68+KRIcSQBI9T9QYbjDUy+MAHkgAbMIbdNQ6XDCsRfANa2Q624a1ozGVzWWMneateLi0JJEGHNZL+gclfsG/3atbWsZK2n53ZuZ5vVZdW0s5Mn09/nu6ebqFYLBIUCoVCoVAo1JSWYBagUCgUCoVC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">
+                    </div>
+                </div>
+                <div class="back">
+                    <div class="magnetic"></div>
+                    <div class="bar"></div>
+                    <span class="seccode" style="color: var(--text-color);">●●●</span>
+                    <span class="chip"></span>
+                    <span class="disclaimer">Bu kartın mülkiyeti xxx bankasına aittir.
+                        <br>
+                        Bu kartın bulunması halinde en yakın xxx bankası şubesine teslim edilmesi rica olunur.
+                    </span>
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+        <div id="installments" style="display: block;">
+            <div class="inst_header">
+                <div class="l_content">
+                    <span>Ödeme Seçenekleri</span>
+                </div>
+                <div class="r_content">
+                    <span>Toplam</span>
+                </div>
+            </div>
+            <div class="inst_table"><div class="inst_line">
+                                                <div class="l_content">
+                                                    <input type="radio" value="1" id="1" name="Installment" checked="checked">
+                                                    <label for="1"> Peşin</label>
+
+                                                </div>
+                                                <div class="r_content"><span><span class="oe_currency_value">2.079,20</span>&nbsp;₺ <b> / AY</b></span><span class="total">Toplam: <span class="oe_currency_value">2.079,20</span>&nbsp;₺</span></div>
+                                            </div><div class="inst_line">
+                                                <div class="l_content">
+                                                    <input type="radio" value="2" id="2" name="Installment">
+                                                    <label for="2"> 2 Taksit</label>
+                                                    <div class="cash_payment">Peşin Fiyatına</div>
+                                                </div>
+                                                <div class="r_content"><span><span class="oe_currency_value">1.039,60</span>&nbsp;₺ <b> / AY</b></span><span class="total">Toplam: <span class="oe_currency_value">2.079,20</span>&nbsp;₺</span></div>
+                                            </div><div class="inst_line">
+                                                <div class="l_content">
+                                                    <input type="radio" value="3" id="3" name="Installment">
+                                                    <label for="3"> 3 Taksit</label>
+                                                    <div class="cash_payment">Peşin Fiyatına</div>
+                                                </div>
+                                                <div class="r_content"><span><span class="oe_currency_value">693,07</span>&nbsp;₺ <b> / AY</b></span><span class="total">Toplam: <span class="oe_currency_value">2.079,20</span>&nbsp;₺</span></div>
+                                            </div><div class="inst_line">
+                                                <div class="l_content">
+                                                    <input type="radio" value="4" id="4" name="Installment">
+                                                    <label for="4"> 4 Taksit</label>
+
+                                                </div>
+                                                <div class="r_content"><span><span class="oe_currency_value">554,63</span>&nbsp;₺ <b> / AY</b></span><span class="total">Toplam: <span class="oe_currency_value">2.218,51</span>&nbsp;₺</span></div>
+                                            </div><div class="inst_line">
+                                                <div class="l_content">
+                                                    <input type="radio" value="5" id="5" name="Installment">
+                                                    <label for="5"> 5 Taksit</label>
+
+                                                </div>
+                                                <div class="r_content"><span><span class="oe_currency_value">452,97</span>&nbsp;₺ <b> / AY</b></span><span class="total">Toplam: <span class="oe_currency_value">2.264,87</span>&nbsp;₺</span></div>
+                                            </div><div class="inst_line">
+                                                <div class="l_content">
+                                                    <input type="radio" value="6" id="6" name="Installment">
+                                                    <label for="6"> 6 Taksit</label>
+
+                                                </div>
+                                                <div class="r_content"><span><span class="oe_currency_value">385,59</span>&nbsp;₺ <b> / AY</b></span><span class="total">Toplam: <span class="oe_currency_value">2.313,53</span>&nbsp;₺</span></div>
+                                            </div><div class="inst_line">
+                                                <div class="l_content">
+                                                    <input type="radio" value="7" id="7" name="Installment">
+                                                    <label for="7"> 7 Taksit</label>
+
+                                                </div>
+                                                <div class="r_content"><span><span class="oe_currency_value">337,96</span>&nbsp;₺ <b> / AY</b></span><span class="total">Toplam: <span class="oe_currency_value">2.365,71</span>&nbsp;₺</span></div>
+                                            </div><div class="inst_line">
+                                                <div class="l_content">
+                                                    <input type="radio" value="8" id="8" name="Installment">
+                                                    <label for="8"> 8 Taksit</label>
+
+                                                </div>
+                                                <div class="r_content"><span><span class="oe_currency_value">302,34</span>&nbsp;₺ <b> / AY</b></span><span class="total">Toplam: <span class="oe_currency_value">2.418,73</span>&nbsp;₺</span></div>
+                                            </div><div class="inst_line">
+                                                <div class="l_content">
+                                                    <input type="radio" value="9" id="9" name="Installment">
+                                                    <label for="9"> 9 Taksit</label>
+
+                                                </div>
+                                                <div class="r_content"><span><span class="oe_currency_value">274,92</span>&nbsp;₺ <b> / AY</b></span><span class="total">Toplam: <span class="oe_currency_value">2.474,25</span>&nbsp;₺</span></div>
+                                            </div><div class="inst_line">
+                                                <div class="l_content">
+                                                    <input type="radio" value="10" id="10" name="Installment">
+                                                    <label for="10"> 10 Taksit</label>
+
+                                                </div>
+                                                <div class="r_content"><span><span class="oe_currency_value">253,37</span>&nbsp;₺ <b> / AY</b></span><span class="total">Toplam: <span class="oe_currency_value">2.533,71</span>&nbsp;₺</span></div>
+                                            </div><div class="inst_line">
+                                                <div class="l_content">
+                                                    <input type="radio" value="11" id="11" name="Installment">
+                                                    <label for="11"> 11 Taksit</label>
+
+                                                </div>
+                                                <div class="r_content"><span><span class="oe_currency_value">235,91</span>&nbsp;₺ <b> / AY</b></span><span class="total">Toplam: <span class="oe_currency_value">2.595,05</span>&nbsp;₺</span></div>
+                                            </div><div class="inst_line">
+                                                <div class="l_content">
+                                                    <input type="radio" value="12" id="12" name="Installment">
+                                                    <label for="12"> 12 Taksit</label>
+
+                                                </div>
+                                                <div class="r_content"><span><span class="oe_currency_value">221,61</span>&nbsp;₺ <b> / AY</b></span><span class="total">Toplam: <span class="oe_currency_value">2.659,30</span>&nbsp;₺</span></div>
+                                            </div></div>
+        </div>
+        <div id="restrictions" style="display: none;">
+            <div class="installment_alert">
+                <div class="alert_badge"></div>
+                <p class="alert_title">Neden taksit yapamıyorum?</p>
+                <div class="alerts"></div>
+            </div>
+        </div>
+
+            <div class="d-flex flex-column flex-md-row align-md-items-center justify-content-between                         gap-2 mt-2">
+
+
+                <p name="o_payment_secured_by" class="align-self-end mb-0 ms-auto small text-600">
+                    <span><i class="fa fa-lock"></i> 256 Bit SSL Güvenlikli </span>
+                    <span class="text-break">Kredi Kartı</span>
+                </p>
+            </div>
+        </div>
+                            </li>
+                            <li name="o_payment_option" class="list-group-item d-flex flex-column gap-2 py-3 o_outline">
+
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-0 p-0" for="o_payment_radio">
+            <div class="form-check d-flex flex-grow-1 flex-wrap mb-0">
+                <div class="d-flex justify-content-between align-items-center gap-2 flex-wrap w-100">
+
+                    <input name="o_payment_radio" type="radio" class="form-check-input position-absolute mt-0" data-payment-option-type="payment_method" id="o_payment_method_200" data-payment-option-id="200" data-payment-method-code="wire_transfer" data-provider-id="15" data-provider-code="custom" data-provider-state="enabled">
+                    <div class="d-flex gap-2 flex-grow-1 me-auto">
+
+                        <label class="o_payment_option_label mb-0 text-break" for="o_payment_method_200">Havale - Eft</label>
+                        <div class="d-flex flex-nowrap gap-2 mt-1">
+
+
+                        </div>
+                    </div>
+                    <div class="gap-1 flex-wrap d-flex">
+
+
+        <span class="position-relative d-block rounded overflow-hidden z-index-1 shadow-sm" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-delay="0" title="" data-bs-original-title="Havale - Eft" aria-label="Havale - Eft"><img src="/web/image/payment.method/200/image_payment_form/Havale%20-%20Eft?unique=4c931fd" class="img img-fluid" alt="Havale - Eft" loading="lazy" style=""></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div name="o_payment_inline_form" class="position-relative d-none">
+            <div class="d-flex flex-column flex-md-row align-md-items-center justify-content-between                         gap-2 mt-2">
+
+
+                <p name="o_payment_secured_by" class="align-self-end mb-0 ms-auto small text-600 d-none">
+                    <span><i class="fa fa-lock"></i> 256 Bit SSL Güvenlikli </span>
+                    <span class="text-break">Özel</span>
+                </p>
+            </div>
+        </div>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end flex-column flex-md-row gap-2 my-2">
+
+
+            </div>
+        </form>
+                </div>
+
+                        </div>

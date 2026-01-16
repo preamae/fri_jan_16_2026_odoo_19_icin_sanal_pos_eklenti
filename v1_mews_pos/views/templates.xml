@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Taksit Seçim Widget'ı -->
+    <template id="installment_selector" name="Taksit Seçici">
+        <div class="mews-installment-selector" t-att-data-amount="amount">
+            <div class="row">
+                <div class="col-12">
+                    <h4>Taksit Seçenekleri</h4>
+                </div>
+            </div>
+            
+            <div class="installment-banks">
+                <t t-foreach="banks" t-as="bank_data">
+                    <div class="bank-section card mb-3">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <t t-if="bank_data['bank']['logo']">
+                                    <img t-att-src="'data:image/png;base64,' + bank_data['bank']['logo']" 
+                                         class="bank-logo me-2" style="height: 30px;"/>
+                                </t>
+                                <strong t-esc="bank_data['bank']['name']"/>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Taksit</th>
+                                        <th>Taksit Tutarı</th>
+                                        <th>Toplam Tutar</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Tek Çekim -->
+                                    <tr class="installment-row">
+                                        <td>Tek Çekim</td>
+                                        <td t-esc="'%. 2f TL' % amount"/>
+                                        <td t-esc="'%.2f TL' % amount"/>
+                                        <td>
+                                            <input type="radio" 
+                                                   name="installment" 
+                                                   t-att-value="1"
+                                                   t-att-data-bank-id="bank_data['bank']['id']"
+                                                   class="form-check-input"/>
+                                        </td>
+                                    </tr>
+                                    <!-- Taksitler -->
+                                    <t t-foreach="bank_data['installments']" t-as="inst">
+                                        <tr class="installment-row" 
+                                            t-att-class="'table-success' if inst.get('is_campaign') else ''">
+                                            <td>
+                                                <t t-esc="inst['installment_count']"/> Taksit
+                                                <t t-if="inst.get('is_campaign')">
+                                                    <span class="badge bg-success">Kampanya</span>
+                                                </t>
+                                            </td>
+                                            <td t-esc="'%.2f TL' % inst['installment_amount']"/>
+                                            <td>
+                                                <span t-esc="'%.2f TL' % inst['total_amount']"/>
+                                                <t t-if="inst['interest_amount'] > 0">
+                                                    <small class="text-muted">
+                                                        (+<t t-esc="'%.2f' % inst['interest_amount']"/> TL)
+                                                    </small>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <input type="radio" 
+                                                       name="installment" 
+                                                       t-att-value="inst['installment_count']"
+                                                       t-att-data-bank-id="bank_data['bank']['id']"
+                                                       t-att-data-total="inst['total_amount']"
+                                                       class="form-check-input"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </template>
+
+    <!-- 3D Secure Form -->
+    <template id="threed_form" name="3D Secure Yönlendirme">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Banka Sayfasına Yönlendiriliyorsunuz... </h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="spinner-border text-primary mb-3" role="status">
+                            <span class="visually-hidden">Yükleniyor...</span>
+                        </div>
+                        <p>Lütfen bekleyiniz, güvenli ödeme sayfasına yönlendiriliyorsunuz.</p>
+                        
+                        <!-- Bu form PHP servisi tarafından doldurulacak -->
+                        <form id="threed_form" method="POST" 
+                              t-att-action="form_data. get('gateway_url')">
+                            <t t-foreach="form_data. get('inputs', {}).items()" t-as="input">
+                                <input type="hidden" t-att-name="input[0]" t-att-value="input[1]"/>
+                            </t>
+                        </form>
+                        
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                setTimeout(function() {
+                                    document.getElementById('threed_form').submit();
+                                }, 1000);
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Ödeme Sayfası Widget -->
+    <template id="payment_form_widget" name="
