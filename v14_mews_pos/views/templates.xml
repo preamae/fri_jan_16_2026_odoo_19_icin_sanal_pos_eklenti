@@ -1,0 +1,31 @@
+<?  xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="product_installments_simple" inherit_id="website_sale.product">
+        <xpath expr="//hr[@id='hr_product_detail_main']" position="before">
+            <div class="container my-5">
+                <div class="alert alert-success">
+                    <h2>🎉 Taksit Modülü Çalışıyor! </h2>
+                    <p>Ürün: <t t-esc="product.name"/></p>
+                    
+                    <t t-set="my_installments" t-value="product._get_installment_display_data()"/>
+                    
+                    <div t-if="my_installments" class="mt-3">
+                        <h4>Mevcut Bankalar:</h4>
+                        <ul>
+                            <t t-foreach="my_installments" t-as="b">
+                                <li>
+                                    <strong t-esc="b['bank_name']"/> - 
+                                    <t t-esc="len(b['installments'])"/> taksit seçeneği
+                                </li>
+                            </t>
+                        </ul>
+                    </div>
+                    
+                    <div t-else="" class="alert alert-warning mt-3">
+                        Taksit seçeneği bulunamadı.
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

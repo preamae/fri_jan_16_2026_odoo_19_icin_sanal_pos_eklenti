@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Ürün sayfası taksitleri (yukarıdaki ile aynı) -->
+    <template id="product_installment_display" name="Product Installment Display">
+        <!-- ...  aynı kod ...  -->
+    </template>
+
+    <template id="product_installments" inherit_id="website_sale.product" priority="20">
+        <xpath expr="//div[hasclass('o_wsale_product_details_content_section_price')]" position="after">
+            <t t-call="mews_pos.product_installment_display"/>
+        </xpath>
+    </template>
+
+    <!-- Ödeme sayfası - ALTERNATİF XPATH -->
+    <template id="payment_installments" name="Payment Installments">
+        <t t-set="sale_order" t-value="sale_order or request.website.sale_get_order()"/>
+        <t t-set="amount" t-value="sale_order.amount_total if sale_order else 0.0"/>
+        
+        <div id="o_payment_installments_container" class="card mt-4 p-4" t-if="amount > 0" 
+             t-att-data-amount="amount">
+            
+            <h5 class="card-title mb-3">Ödeme Seçenekleri</h5>
+            
+            <div id="installment_options" class="list-group">
+                <div class="text-center py-3">
+                    <i class="fa fa-spinner fa-spin"/> Taksit seçenekleri yükleniyor... 
+                </div>
+            </div>
+            
+            <input type="hidden" name="installment_count" id="installment_count" value="1"/>
+            <input type="hidden" name="installment_bank_id" id="installment_bank_id" value=""/>
+            <input type="hidden" name="installment_amount" id="installment_amount" t-att-value="amount"/>
+        </div>
+    </template>
+
+    <!-- CHECKOUT sayfasına ekle -->
+    <template id="payment_checkout_installments" inherit_id="website_sale.checkout" priority="50">
+        <xpath expr="//div[@id='o_payment_form_pay']" position="before">
+            <t t-call="mews_pos.payment_installments"/>
+        </xpath>
+    </template>
+
+</odoo>

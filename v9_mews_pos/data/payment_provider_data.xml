@@ -1,0 +1,19 @@
+<!-- Banka recordlarına ekle -->
+<record id="mews_pos_bank_akbank" model="mews.pos. bank">
+    <field name="name">Akbank</field>
+    <field name="code">akbank</field>
+    <field name="bin_ranges">540668,557835,454360,454361,454362</field>
+    <!-- ...  diğer fieldlar ...  -->
+</record>
+
+<record id="mews_pos_bank_garanti" model="mews.pos.bank">
+    <field name="name">Garanti BBVA</field>
+    <field name="code">garanti</field>
+    <field name="bin_ranges">540669,541865,549117,537506,459494</field>
+</record>
+
+<record id="mews_pos_bank_yapikredi" model="mews.pos.bank">
+    <field name="name">YapıKredi</field>
+    <field name="code">yapikredi</field>
+    <field name="bin_ranges">540061,540131,540136,540140,540644</field>
+</record>

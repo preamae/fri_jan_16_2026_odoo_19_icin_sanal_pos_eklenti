@@ -1,0 +1,54 @@
+<? xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <!-- BANKALAR -->
+        <record id="mews_pos_bank_akbank" model="mews.pos.bank">
+            <field name="name">Akbank</field>
+            <field name="code">akbank</field>
+            <field name="sequence">10</field>
+            <field name="gateway_type">akbank_pos</field>
+            <field name="payment_model">3d_secure</field>
+            <field name="environment">test</field>
+            <field name="bin_ranges">540668,557835,454360,454361,454362,540060,540061</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="mews_pos_bank_garanti" model="mews.pos.bank">
+            <field name="name">Garanti BBVA</field>
+            <field name="code">garanti</field>
+            <field name="sequence">20</field>
+            <field name="gateway_type">garanti_pos</field>
+            <field name="payment_model">3d_secure</field>
+            <field name="environment">test</field>
+            <field name="bin_ranges">540669,541865,549117,537506,459494,526910</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="mews_pos_bank_yapikredi" model="mews.pos.bank">
+            <field name="name">YapıKredi</field>
+            <field name="code">yapikredi</field>
+            <field name="sequence">30</field>
+            <field name="gateway_type">posnet</field>
+            <field name="payment_model">3d_secure</field>
+            <field name="environment">test</field>
+            <field name="bin_ranges">540061,540131,540136,540140,540644,540686</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="mews_pos_bank_isbank" model="mews.pos.bank">
+            <field name="name">İşbank</field>
+            <field name="code">isbank</field>
+            <field name="sequence">40</field>
+            <field name="gateway_type">estv3_pos</field>
+            <field name="payment_model">3d_secure</field>
+            <field name="environment">test</field>
+            <field name="bin_ranges">454671,511884,418904,401671,424142</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- TAKSİTLER (önceki gibi) -->
+        <!-- ...  taksit recordları ... -->
+
+    </data>
+</odoo>

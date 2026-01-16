@@ -1,0 +1,63 @@
+<? xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Taksit Tablosu -->
+    <template id="product_installment_section" name="Product Installment Section">
+        <section class="container mt-4 mb-4" t-if="product and product.installment_allowed">
+            <t t-set="installments" t-value="product._get_installment_display_data()"/>
+            
+            <div class="card shadow-sm" t-if="installments">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0"><i class="fa fa-credit-card"/> Taksit Seçenekleri</h3>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <t t-foreach="installments" t-as="bank_data">
+                            <div class="col-lg-4 col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-header text-center text-white" t-att-style="'background:  ' + bank_data.get('color', '#6c757d')">
+                                        <h5 class="mb-0" t-esc="bank_data['bank_name']"/>
+                                    </div>
+                                    <table class="table table-sm mb-0">
+                                        <thead class="thead-light">
+                                            <tr class="text-center">
+                                                <th>Taksit</th>
+                                                <th>Aylık</th>
+                                                <th>Toplam</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="bank_data['installments']" t-as="inst">
+                                                <tr class="text-center">
+                                                    <td><strong t-esc="inst['installment_count']"/></td>
+                                                    <td>
+                                                        <strong class="text-primary" t-esc="'%. 2f TL' % inst['installment_amount']"/>
+                                                    </td>
+                                                    <td class="text-muted" t-esc="'%.2f TL' % inst['total_amount']"/>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <!-- Ürün Sayfasına Ekle -->
+    <template id="product_page_installments" inherit_id="website_sale.product" name="Product Installments">
+        <xpath expr="//div[@id='product_detail']" position="after">
+            <t t-call="mews_pos.product_installment_section"/>
+        </xpath>
+    </template>
+
+    <!-- Eğer product_detail yoksa alternatif -->
+    <template id="product_page_installments_alt" inherit_id="website_sale.product" name="Product Installments Alt" active="False">
+        <xpath expr="//hr[@id='hr_product_detail_main']" position="after">
+            <t t-call="mews_pos.product_installment_section"/>
+        </xpath>
+    </template>
+
+</odoo>

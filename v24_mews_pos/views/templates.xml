@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Ürün sayfası taksitleri (aynı) -->
+    <template id="product_installment_display" name="Product Installment Display">
+        <!-- ...  önceki kod aynı ... -->
+    </template>
+
+    <template id="product_installments" inherit_id="website_sale.product" priority="20">
+        <xpath expr="//div[hasclass('o_wsale_product_details_content_section_price')]" position="after">
+            <t t-call="mews_pos.product_installment_display"/>
+        </xpath>
+    </template>
+
+    <!-- ÖDEME SAYFASI TAKSİT - STANDALONE -->
+    <template id="payment_installments_section" name="Payment Installments Section">
+        <t t-set="tx_sudo" t-value="tx_sudo if tx_sudo else None"/>
+        <t t-set="sale_order" t-value="sale_order if sale_order else request.website. sale_get_order()"/>
+        <t t-set="amount" t-value="sale_order.amount_total if sale_order else 0"/>
+        
+        <div class="mt-4 mb-4" t-if="amount > 0" id="mews_installment_container" t-att-data-amount="amount">
+            <h4><i class="fa fa-credit-card"/> Ödeme Seçenekleri</h4>
+            
+            <!-- DEBUG: Amount göster -->
+            <div class="alert alert-info">
+                <strong>DEBUG: </strong> Tutar: <t t-esc="amount"/> TL
+                <br/>Order ID: <t t-esc="sale_order.id if sale_order else 'None'"/>
+            </div>
+            
+            <div id="installment_list" class="card">
+                <div class="card-body text-center py-5">
+                    <i class="fa fa-spinner fa-spin fa-3x text-primary"/>
+                    <p class="mt-3">Taksit seçenekleri yükleniyor...</p>
+                </div>
+            </div>
+            
+            <!-- Hidden inputs -->
+            <input type="hidden" name="mews_installment_count" id="mews_installment_count" value="1"/>
+            <input type="hidden" name="mews_bank_id" id="mews_bank_id" value=""/>
+            <input type="hidden" name="mews_total_amount" id="mews_total_amount" t-att-value="amount"/>
+        </div>
+        
+        <!-- DEBUG: JavaScript yüklendi mi?  -->
+        <script type="text/javascript">
+            console.log('Mews POS: Template loaded');
+            console.log('Amount:', '<t t-esc="amount"/>');
+        </script>
+    </template>
+
+    <!-- Payment checkout sayfasına ekle -->
+    <template id="payment_checkout_installments" inherit_id="website_sale.payment" priority="99">
+        <xpath expr="//div[@id='payment_method']" position="after">
+            <t t-call="mews_pos.payment_installments_section"/>
+        </xpath>
+    </template>
+
+</odoo>

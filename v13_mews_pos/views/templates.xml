@@ -1,0 +1,83 @@
+<? xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- DEBUG Template -->
+    <template id="product_installment_debug" inherit_id="website_sale.product" name="Installment Debug">
+        <xpath expr="//div[@id='product_detail']" position="after">
+            <div class="container mt-4 alert alert-info">
+                <h4>🔍 DEBUG INFO</h4>
+                <p>Product: <strong t-esc="product.name"/></p>
+                <p>Installment Allowed: <t t-esc="product. installment_allowed"/></p>
+                <p>List Price:  <t t-esc="product.list_price"/></p>
+                
+                <t t-set="installment_data" t-value="product._get_installment_display_data()"/>
+                <p>Installments Found: <strong t-esc="len(installment_data)"/></strong></p>
+                
+                <t t-if="installment_data">
+                    <div class="alert alert-success">✅ Taksit verisi VAR!</div>
+                </t>
+                <t t-else="">
+                    <div class="alert alert-danger">❌ Taksit verisi YOK!</div>
+                </t>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- ASIL Taksit Tablosu -->
+    <template id="product_installment_table" inherit_id="website_sale. product" name="Product Installments" priority="99">
+        <xpath expr="//div[@id='product_detail']" position="after">
+            <t t-set="installments" t-value="product._get_installment_display_data()"/>
+            
+            <section class="container mt-5 mb-5" t-if="installments">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white py-3">
+                        <h3 class="mb-0">
+                            <i class="fa fa-credit-card"/> Taksit Seçenekleri
+                        </h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <t t-foreach="installments" t-as="bank">
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card h-100 border">
+                                        <div class="card-header text-white text-center py-3" t-att-style="'background-color:  ' + bank['color']">
+                                            <h4 class="mb-0" t-esc="bank['bank_name']"/>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover mb-0">
+                                                <thead class="table-light">
+                                                    <tr class="text-center">
+                                                        <th style="width: 25%">Taksit</th>
+                                                        <th style="width: 40%">Aylık Ödeme</th>
+                                                        <th style="width: 35%">Toplam</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-foreach="bank['installments']" t-as="inst">
+                                                        <tr class="text-center">
+                                                            <td>
+                                                                <strong class="text-primary" t-esc="inst['installment_count']"/>
+                                                            </td>
+                                                            <td>
+                                                                <strong class="text-success">
+                                                                    <t t-esc="'{: ,.2f}'.format(inst['installment_amount']).replace(',', '.')"/> ₺
+                                                                </strong>
+                                                            </td>
+                                                            <td class="text-muted">
+                                                                <t t-esc="'{:,. 2f}'.format(inst['total_amount']).replace(',', '.')"/> ₺
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+    </template>
+
+</odoo>

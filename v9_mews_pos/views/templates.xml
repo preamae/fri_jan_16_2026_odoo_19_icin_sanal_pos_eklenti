@@ -1,0 +1,113 @@
+<? xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Taksit Tablosu Template -->
+    <template id="product_installment_display" name="Product Installment Display">
+        <t t-set="installment_data" t-value="product._get_installment_display_data() if product else []"/>
+        
+        <section class="container mt-5 mb-5" t-if="installment_data">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0"><i class="fa fa-credit-card"/> Taksit Seçenekleri</h3>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <t t-foreach="installment_data" t-as="bank_option">
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card h-100 installment-bank-card">
+                                    <div class="card-header text-center" t-att-style="'background-color: ' + bank_option.get('color', '#6c757d')">
+                                        <h5 class="mb-0 text-white" t-esc="bank_option['bank_name']"/>
+                                    </div>
+                                    <table class="table table-sm table-hover mb-0">
+                                        <thead class="thead-light">
+                                            <tr class="text-center">
+                                                <th width="25%">Taksit</th>
+                                                <th width="40%">Aylık</th>
+                                                <th width="35%">Toplam</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="bank_option['installments']" t-as="inst">
+                                                <tr class="text-center" t-att-class="'table-success' if inst.get('is_campaign') else ''">
+                                                    <td><strong t-esc="inst['installment_count']"/></td>
+                                                    <td>
+                                                        <strong class="text-primary">
+                                                            <t t-esc="'{: ,.2f}'.format(inst['installment_amount'])"/> TL
+                                                        </strong>
+                                                        <br t-if="inst. get('is_campaign')"/>
+                                                        <small t-if="inst. get('is_campaign')" class="badge badge-success">Kampanya</small>
+                                                    </td>
+                                                    <td class="text-muted">
+                                                        <t t-esc="'{:,.2f}'.format(inst['total_amount'])"/> TL
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <!-- Ürün Sayfası - PRIMARY METHOD kullanarak REPLACE -->
+    <template id="product_page_with_installments" inherit_id="website_sale.product" name="Product With Installments" primary="True">
+        <xpath expr="." position="inside">
+            <t t-call="mews_pos.product_installment_display"/>
+        </xpath>
+    </template>
+
+    <!-- Sepet Taksit Bilgisi -->
+    <template id="cart_installment_info" name="Cart Installment Info">
+        <div class="alert mews-cart-info mt-3 p-4 rounded">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h5 class="text-white"><i class="fa fa-credit-card"/> Taksit Seçenekleri</h5>
+                    <p class="mb-0 text-white-75">Ödeme adımında tüm bankaların taksitlerini görebilirsiniz.</p>
+                </div>
+                <div class="col-md-4 text-right">
+                    <button type="button" class="btn btn-light btn-lg" data-toggle="modal" data-target="#installmentModal">
+                        <i class="fa fa-calculator"/> Hesapla
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="installmentModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title"><i class="fa fa-credit-card"/> Taksit Seçenekleri</h5>
+                        <button type="button" class="close text-white" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="installmentModalContent">
+                        <div class="text-center py-5">
+                            <i class="fa fa-spinner fa-spin fa-3x text-primary"/>
+                            <p class="mt-3">Yükleniyor...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Sepet Sayfası -->
+    <template id="cart_with_installments" inherit_id="website_sale.cart_summary" name="Cart With Installments">
+        <xpath expr="//div[@id='cart_total']" position="after">
+            <t t-call="mews_pos.cart_installment_info"/>
+        </xpath>
+    </template>
+
+    <!-- Assets -->
+    <template id="mews_pos_frontend_assets" inherit_id="website. assets_frontend" name="Mews POS Assets">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/mews_pos/static/src/css/installment.css"/>
+            <script src="/mews_pos/static/src/js/installment_calculator.js"/>
+        </xpath>
+    </template>
+</odoo>
